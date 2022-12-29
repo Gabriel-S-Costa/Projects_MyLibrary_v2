@@ -3,15 +3,14 @@ from django.utils import timezone
 
 
 class TimeStampedModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
 
     class Meta:
         abstract = True
 
 
 class SoftDeleteManager(models.Manager):
-
     def delete():
         return super().update(deleted_at=timezone.now())
 
@@ -37,6 +36,5 @@ class SoftDeleteModel(models.Model):
 
 
 class BaseModel(TimeStampedModel, SoftDeleteModel):
-
     class Meta:
         abstract = True
